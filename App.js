@@ -16,7 +16,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeArea } from "./src/components/utility/safe-area.component";
 import { Ionicons } from "@expo/vector-icons";
-
+import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 
 const SettingsScreen = () => (
   <SafeArea>
@@ -35,26 +35,26 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        let iconName;
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-        if (route.name === 'Restaurant') {
-          iconName = "md-restaurant";
-        } else if (route.name === 'Settings') {
-          iconName = "md-settings";
-        }
-        else if (route.name === 'Maps') {
-          iconName = "md-map";
-        }
+          if (route.name === 'Restaurant') {
+            iconName = "md-restaurant";
+          } else if (route.name === 'Settings') {
+            iconName = "md-settings";
+          }
+          else if (route.name === 'Maps') {
+            iconName = "md-map";
+          }
 
-        // You can return any component that you like here!
-        return <Ionicons name={iconName} size={size} color={color} />;
-      },
-      tabBarActiveTintColor: 'tomato',
-      tabBarInactiveTintColor: 'gray',
-    })}
-  >
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'tomato',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
       <Tab.Screen name="Restaurant" component={RestaurantsScreen} />
       <Tab.Screen name="Maps" component={MapScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
@@ -79,9 +79,11 @@ export default function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
-          <MyTabs />
-        </NavigationContainer>
+        <RestaurantsContextProvider>
+          <NavigationContainer>
+            <MyTabs />
+          </NavigationContainer>
+        </RestaurantsContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />
     </>
