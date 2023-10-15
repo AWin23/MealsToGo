@@ -2,24 +2,17 @@ import React, { useContext } from "react";
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { StatusBar, StyleSheet, FlatList, SafeAreaView, } from 'react-native';
 import { View } from "react-native";
-import { Searchbar } from "react-native-paper";
 import styled from "styled-components/native";
 
 import { SafeArea } from "../../../components/utility/safe-area.component";
-import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 import { Spacer } from "../../../components/spacers/spacer.component";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
-export const SearchContainer = styled.View`
-  padding: ${(props) => props.theme.space[3]};
-  shadow-color: #000;
-  shadow-offset: 0px 2px;
-  shadow-opacity: 0.3;
-  shadow-radius: 2px;
-  elevation: 2; /* This property adds a shadow on Android */
-`;
+import { Search } from '../components/search.component';
+import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
+
 
 const RestaurantList = styled(FlatList).attrs({
     contentContainerStyle: {
@@ -41,7 +34,7 @@ const LoadingContainer = styled.View`
 export const RestaurantsScreen = () => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
     return (
-        
+
         <SafeArea>
             {isLoading && (
                 <LoadingContainer style={{ position: "absolute", top: "50%", left: "50%" }}>
@@ -54,10 +47,7 @@ export const RestaurantsScreen = () => {
                     Unable to Find Nearby Data 🥲
                 </ErrorContainer>
             )}
-
-            <SearchContainer>
-                <Searchbar placeholder="Search for Nearby Meals" />
-            </SearchContainer>
+            <Search />
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => {
