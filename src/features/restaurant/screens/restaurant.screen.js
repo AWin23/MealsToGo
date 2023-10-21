@@ -30,6 +30,12 @@ const LoadingContainer = styled.View`
     left: 50%;
 `;
 
+const ErrorContainer = styled.View`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+`;
+
 
 export const RestaurantsScreen = () => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
