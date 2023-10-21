@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useState } from "react";
 
 import { locationRequest, locationTransform } from './location.service.js';
 
@@ -13,21 +13,25 @@ export const LocationContextProvider = ({ children }) => {
     const onSearch = (searchKeyword) => {
         setIsLoading(true);
         setKeyword(searchKeyword);
-        if (!searchKeyword.length) {
-            // don't do anything.
+    };
+
+    useEffect(() => {
+        if (!keyword.length) {
+            // don't do anything
             return;
         }
-        locationRequest(searchKeyword.toLowerCase())
+        locationRequest(keyword.toLowerCase())
             .then(locationTransform)
             .then((result) => {
                 setIsLoading(false);
                 setLocation(result);
+                console.log(result);
             })
             .catch((err) => {
                 setIsLoading(false);
                 setError(err);
             });
-    };
+    }, [keyword])
 
 
     return (

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components/native";
-import { StatusBar, StyleSheet, Text, View, SafeAreaView, Platform, Image } from 'react-native';
+import { StatusBar, StyleSheet, Text } from 'react-native';
 import { Avatar, Card } from "react-native-paper";
 import { SvgXml } from 'react-native-svg';
 import { Spacer } from "../../../components/spacers/spacer.component";
@@ -20,6 +20,7 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
         isOpenNow = true,
         rating = 4,
         isClosedTemporarily = true,
+        placeId,
     } = restaurant;
 
     const ratingArray = Array.from(new Array(Math.floor(rating)));
@@ -29,24 +30,29 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
             <Info>
                 <Text variant="label">{name}</Text>
                 <Section>
-                <Rating>
-                    {ratingArray.map(() => (
-                        <SvgXml xml={star} width={20} height={20} />
-                    ))}
-                </Rating>
-                <SectionEnd>
+                    <Rating>
+                        {ratingArray.map((_, i) => (
+                            <SvgXml
+                                key={`star-${placeId}-${i}`}
+                                xml={star}
+                                width={20}
+                                height={20}
+                            />
+                        ))}
+                    </Rating>
+                    <SectionEnd>
                         {isClosedTemporarily && (
                             <Text variant="error" style={{ color: "red" }}>
                                 CLOSED TEMPORARILY
                             </Text>
                         )}
-                    <Spacer position="left" size="large">               
-                    {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
-                    </Spacer>
-                    <Spacer position="left" size="large">                
-                    <Icon source={{ uri: icon }} />
-                    </Spacer>
-                </SectionEnd>
+                        <Spacer position="left" size="large">
+                            {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
+                        </Spacer>
+                        <Spacer position="left" size="large">
+                            <Icon source={{ uri: icon }} />
+                        </Spacer>
+                    </SectionEnd>
                 </Section>
                 <Address>{address}</Address>
             </Info>
