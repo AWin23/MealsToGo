@@ -31,11 +31,17 @@ const MyTabs = () => {
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
 
+                    //  check if the route is restaurant, redirect to Restraunt component if so
                     if (route.name === 'Restaurant') {
                         iconName = "md-restaurant";
-                    } else if (route.name === 'Settings') {
+                    }
+
+                    //  check if the route is Settings, redirect to Settings component if so
+                    else if (route.name === 'Settings') {
                         iconName = "md-settings";
                     }
+
+                    //  check if the route is Maps, redirect to Maps component if so
                     else if (route.name === 'Maps') {
                         iconName = "md-map";
                     }
