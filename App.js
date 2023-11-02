@@ -19,51 +19,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
 
 import { LocationContextProvider } from "./src/services/location/location.context";
+import { Navigation } from "./src/infastructure/navigation";
 
-
-const SettingsScreen = () => (
-  <SafeArea>
-    <Text>Settings!</Text>
-  </SafeArea>);
-
-
-
-const MapScreen = () => (
-  <SafeArea><Text>Maps!</Text>
-  </SafeArea>);
-
-const Tab = createBottomTabNavigator();
-
-
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName;
-
-          if (route.name === 'Restaurant') {
-            iconName = "md-restaurant";
-          } else if (route.name === 'Settings') {
-            iconName = "md-settings";
-          }
-          else if (route.name === 'Maps') {
-            iconName = "md-map";
-          }
-
-          // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-        },
-        tabBarActiveTintColor: 'tomato',
-        tabBarInactiveTintColor: 'gray',
-      })}
-    >
-      <Tab.Screen name="Restaurant" component={RestaurantsScreen} />
-      <Tab.Screen name="Maps" component={MapScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
-    </Tab.Navigator>
-  )
-}
 
 export default function App() {
 
@@ -84,9 +41,7 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <LocationContextProvider>
           <RestaurantsContextProvider>
-            <NavigationContainer>
-              <MyTabs />
-            </NavigationContainer>
+            <Navigation />
           </RestaurantsContextProvider>
         </LocationContextProvider>
       </ThemeProvider>
