@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from 'styled-components/native';
 import { Searchbar } from "react-native-paper";
 import { LocationContext } from "../../../services/location/location.context";
@@ -10,6 +10,10 @@ export const SearchContainer = styled.View`
   shadow-opacity: 0.3;
   shadow-radius: 2px;
   elevation: 2; /* This property adds a shadow on Android */
+  position: absolute; 
+  z-index: 999;
+  top: 35px;
+  width: 100%;
 `;
 
 export const Search = () => {
@@ -18,12 +22,15 @@ export const Search = () => {
     useEffect(() => {
         setSearchKeyword(keyword);
     }, [keyword]);
+
     return (
         <SearchContainer>
             <Searchbar
-                placeholder="Search for Nearby Meals"
+                placeholder="Search for a location"
+                icon="map"
                 value={searchKeyword}
                 onSubmitEditing={() => {
+                    console.log("useeffect fired in search.components.js");
                     search(searchKeyword);
                 }}
                 onChangeText={(text) => {
