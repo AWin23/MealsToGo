@@ -1,70 +1,53 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { Text } from "react-native";
+
 import { SafeArea } from "../../components/utility/safe-area.component";
-import { RestaurantsScreen } from "../../features/restaurant/screens/restaurant.screen";
-import { Ionicons } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Text } from 'react-native-paper';
 
-
-
-//  Settings screen Tab
-const SettingsScreen = () => (
-    <SafeArea>
-        <Text>Settings!</Text>
-    </SafeArea>);
-
-
-//  Map screen tab
-const MapScreen = () => (
-    <SafeArea><Text>Maps!</Text>
-    </SafeArea>);
+import { RestaurantsNavigator } from "./restaurants.navigator";
 
 const Tab = createBottomTabNavigator();
 
+const TAB_ICON = {
+    Restaurants: "md-restaurant",
+    Map: "md-map",
+    Settings: "md-settings",
+};
 
-// function component for MyTabs UI
-const MyTabs = () => {
-    return (
+const Settings = () => (
+    <SafeArea>
+        <Text>Settings</Text>
+    </SafeArea>
+);
+const Map = () => (
+    <SafeArea>
+        <Text>Map</Text>
+    </SafeArea>
+);
+
+const createScreenOptions = ({ route }) => {
+    const iconName = TAB_ICON[route.name];
+    return {
+        tabBarIcon: ({ size, color }) => (
+            <Ionicons name={iconName} size={size} color={color} />
+        ),
+    };
+};
+
+export const AppNavigator = () => (
+    <NavigationContainer>
         <Tab.Navigator
-            screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
-                    let iconName;
-
-                    //  check if the route is restaurant, redirect to Restraunt component if so
-                    if (route.name === 'Restaurant') {
-                        iconName = "md-restaurant";
-                    }
-
-                    //  check if the route is Settings, redirect to Settings component if so
-                    else if (route.name === 'Settings') {
-                        iconName = "md-settings";
-                    }
-
-                    //  check if the route is Maps, redirect to Maps component if so
-                    else if (route.name === 'Maps') {
-                        iconName = "md-map";
-                    }
-
-                    // You can return any component that you like here!
-                    return <Ionicons name={iconName} size={size} color={color} />;
-                },
-                tabBarActiveTintColor: 'tomato',
-                tabBarInactiveTintColor: 'gray',
-            })}
+            screenOptions={createScreenOptions}
+            tabBarOptions={{
+                activeTintColor: "tomato",
+                inactiveTintColor: "gray",
+            }}
         >
-            <Tab.Screen name="Restaurant" component={RestaurantsScreen} />
-            <Tab.Screen name="Maps" component={MapScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+            <Tab.Screen name="Restaurants" component={RestaurantsNavigator} />
+            <Tab.Screen name="Map" component={Map} />
+            <Tab.Screen name="Settings" component={Settings} />
         </Tab.Navigator>
-    )
-}
-
-//  Return render function that calls all components for app navigator
-export const AppNavigator = () => {
-    return (
-        <NavigationContainer>
-            <MyTabs />
-        </NavigationContainer>
-    )
-}
+    </NavigationContainer>
+);
