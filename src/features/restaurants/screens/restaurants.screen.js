@@ -7,6 +7,8 @@ import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
+import { FavouritesContext, FavouritesContextProvider } from "../../../services/favourites/favourites.context";
+
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
 
 import { Search } from "../components/search.component";
@@ -38,6 +40,9 @@ const ErrorContainer = styled.View`
 
 export const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
+    const { favourites } = useContext(FavouritesContext);
+    console.log(favourites);
+
     return (
 
         <SafeArea>
