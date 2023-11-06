@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { FlatList, TouchableOpacity } from 'react-native';
 import styled from "styled-components/native";
@@ -10,6 +10,8 @@ import { RestaurantsContext } from "../../../services/restaurants/restaurants.co
 import { FavouritesContext, FavouritesContextProvider } from "../../../services/favourites/favourites.context";
 
 import { ActivityIndicator, MD2Colors } from 'react-native-paper';
+
+import { FavouritesBar } from "../components/favourites/favourites-bar.component";
 
 import { Search } from "../components/search.component";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
@@ -41,7 +43,7 @@ const ErrorContainer = styled.View`
 export const RestaurantsScreen = ({ navigation }) => {
     const { isLoading, error, restaurants } = useContext(RestaurantsContext);
     const { favourites } = useContext(FavouritesContext);
-    console.log(favourites);
+    const [isToggled, setIsToggled] = useState(false);
 
     return (
 
@@ -57,7 +59,11 @@ export const RestaurantsScreen = ({ navigation }) => {
                     Unable to Find Nearby Data 🥲
                 </ErrorContainer>
             )}
-            <Search />
+            <Search
+                isFavouritesToggled={isToggled}
+                onFavouritesToggle={() => setIsToggled(!isToggled)}
+            />
+            {isToggled && <FavouritesBar />}
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => {

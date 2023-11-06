@@ -12,7 +12,7 @@ export const SearchContainer = styled.View`
   elevation: 2; /* This property adds a shadow on Android */
 `;
 
-export const Search = () => {
+export const Search = ({ isFavouritesToggled, onFavouritesToggle }) => {
     const { keyword, search } = useContext(LocationContext);
     const [searchKeyword, setSearchKeyword] = useState(keyword);
     useEffect(() => {
@@ -21,6 +21,8 @@ export const Search = () => {
     return (
         <SearchContainer>
             <Searchbar
+                icon={ isFavouritesToggled ? "heart" : "heart-outline"}
+                onIconPress={onFavouritesToggle}
                 placeholder="Search for Nearby Meals"
                 value={searchKeyword}
                 onSubmitEditing={() => {
