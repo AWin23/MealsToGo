@@ -2,11 +2,12 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
-import { Text } from "react-native";
+
 
 import { SafeArea } from "../../components/utility/safe-area.component";
 
 import { RestaurantsNavigator } from "./restaurants.navigator";
+import { SettingsNavigator } from "./settings.navigator";
 import { MapScreen } from "../../features/map/screens/map.screen";
 
 const Tab = createBottomTabNavigator();
@@ -17,11 +18,11 @@ const TAB_ICON = {
     Settings: "md-settings",
 };
 
-const Settings = () => (
-    <SafeArea>
-        <Text>Settings</Text>
-    </SafeArea>
-);
+// const Settings = () => (
+//     <SafeArea>
+//         <Text>Settings</Text>
+//     </SafeArea>
+// );
 
 
 const createScreenOptions = ({ route }) => {
@@ -54,7 +55,7 @@ export const AppNavigator = () => (
             />
             <Tab.Screen
                 name="Settings"
-                component={Settings}
+                component={SettingsNavigator}
                 options={{ headerShown: false }}
             />
         </Tab.Navigator>

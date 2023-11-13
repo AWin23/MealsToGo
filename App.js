@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
 import { RestaurantsScreen } from "./src/features/restaurants/screens/restaurants.screen";
 import { Text, View } from 'react-native';
@@ -10,7 +10,9 @@ import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 
 import { ThemeProvider } from "styled-components/native";
-//import * as firebase from 'firebase';
+
+// import * as firebase from "firebase/app";
+// import 'firebase/auth';
 
 import { theme } from './src/infastructure/theme';
 import { RestaurantsContextProvider } from "./src/services/restaurants/restaurants.context";
@@ -29,10 +31,23 @@ import { Navigation } from "./src/infastructure/navigation";
 //   appId: "1:1056370946452:web:eb25a1ff1d550d3605df81"
 // };
 
-// firebase.initializeApp(firebaseConfig);
-
+// if (!firebase.apps.length) {
+//   firebase.initializeApp(firebaseConfig);
+// }
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // useEffect(() => {
+  //   firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword("email@gmail.com", "test123")
+  //     .then((user) => {
+  //       setIsAuthenticated(true);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, []);
 
   const [oswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -45,6 +60,8 @@ export default function App() {
   if (!oswaldLoaded || !latoLoaded) {
     return null;
   }
+
+  //if (!isAuthenticated) return null;
 
   return (
     <>
