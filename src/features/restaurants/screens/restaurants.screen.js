@@ -16,12 +16,8 @@ import { FavouritesBar } from "../components/favourites/favourites-bar.component
 import { Search } from "../components/search.component";
 import { RestaurantInfoCard } from "../components/restaurant-info-card.component";
 
+import { RestaurantList } from '../components/restaurant-list.styles';
 
-const RestaurantList = styled(FlatList).attrs({
-    contentContainerStyle: {
-        padding: 16,
-    },
-})``;
 
 const Loading = styled(ActivityIndicator)`
     margin-left: -25px;
@@ -63,7 +59,10 @@ export const RestaurantsScreen = ({ navigation }) => {
                 isFavouritesToggled={isToggled}
                 onFavouritesToggle={() => setIsToggled(!isToggled)}
             />
-            {isToggled && <FavouritesBar favourites={favourites} onNavigate={navigation.navigate} />}
+            {isToggled && <FavouritesBar
+                favourites={favourites}
+                onNavigate={navigation.navigate}
+            />}
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => {
