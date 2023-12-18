@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
 import { StatusBar as ExpoStatusBar } from 'expo-status-bar';
-import { FlatList, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import styled from "styled-components/native";
 
+import { FadeInView } from "../../../components/animations/fade.animation";
 import { SafeArea } from "../../../components/utility/safe-area.component";
 import { Spacer } from "../../../components/spacer/spacer.component";
 
@@ -62,7 +63,8 @@ export const RestaurantsScreen = ({ navigation }) => {
             {isToggled && <FavouritesBar
                 favourites={favourites}
                 onNavigate={navigation.navigate}
-            />}
+            />
+            }
             <RestaurantList
                 data={restaurants}
                 renderItem={({ item }) => {
@@ -75,7 +77,9 @@ export const RestaurantsScreen = ({ navigation }) => {
                             }
                         >
                             <Spacer position="bottom" size="large">
-                                <RestaurantInfoCard restaurant={item} />
+                                <FadeInView>
+                                    <RestaurantInfoCard restaurant={item} />
+                                </FadeInView>
                             </Spacer>
                         </TouchableOpacity>
                     );
