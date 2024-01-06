@@ -22,7 +22,7 @@ export const SettingsScreen = ({ navigation }) => {
             <AvatarContainer>
                 <Avatar.Icon size={180} icon="human" backgroundColor="#2182BD" />
                 <Spacer position="top" size="large">
-                    <Text variant="label">{"test email"}</Text>
+                    <Text variant="label">{"Default User(Test account)"}</Text>
                 </Spacer>
             </AvatarContainer>
             <List.Section>
@@ -33,7 +33,7 @@ export const SettingsScreen = ({ navigation }) => {
                     onPress={() => navigation.navigate("Favourites")}
                 />
                 <SettingsItem
-                    title="Logout"
+                    title="Logout(Under Construction)"
                     left={(props) => <List.Icon {...props} color="black" icon="door" />}
                 />
             </List.Section>
