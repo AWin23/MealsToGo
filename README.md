@@ -12,7 +12,7 @@ This tab serves as the main screen for users to explore and navigate through var
     - **Food Options Button**
     - Users can interact food options ONCE CLICKING on restaurant
     - View and manage types of food based on when time of day(Breakfast, Lunch Dinner, etc).
-    - ![Food Option Button](./RestaurantFoodOptions-min.png).
+    - ![Food Option Button](./RestaurantFoodOptions.png).
 
 
 
