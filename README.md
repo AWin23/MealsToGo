@@ -7,7 +7,7 @@ This tab serves as the main screen for users to explore and navigate through var
   - **Like Button**
     - Users can interact with a "LIKE" button for images.
     - View and manage liked items.
-    - [Like Button](./FavButtons-min.png).
+    - ![Like Button](./FavButtons-min.png).
 
 
 
