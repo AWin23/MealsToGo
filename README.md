@@ -2,12 +2,17 @@
 
 ## Home Tab
 ![Home Tab](./HomeTab-min.png)
-This tab serves as the main screen for users to explore and navigate through various food options available for ordering.
+This tab serves as the main screen for users to explore and navigate through various food options available for ordering and restaurants
 
   - **Like Button**
     - Users can interact with a "LIKE" button for images.
     - View and manage liked items.
     - ![Like Button](./FavButtons-min.png).
+
+    - **Food Options Button**
+    - Users can interact food options ONCE CLICKING on restaurant
+    - View and manage types of food based on when time of day(Breakfast, Lunch Dinner, etc).
+    - ![Food Option Button](./RestaurantFoodOptins-min.png).
 
 
 
